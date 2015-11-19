@@ -222,7 +222,7 @@ class GitClient(SCMClient):
             # Top level might not work on old git version se we use git dir
             # to find it.
             if (git_top.startswith('fatal:') or not os.path.isdir(git_dir)
-                or git_top.startswith('cygdrive')):
+                or git_top.startswith('/cygdrive')):
                 git_top = git_dir
 
             os.chdir(os.path.abspath(git_top))
@@ -712,6 +712,7 @@ class GitClient(SCMClient):
         Returns True if the working directory has been modified or if changes
         have been staged in the index, otherwise returns False.
         """
+        os.chdir("..")
         status = execute(['git', 'status', '--porcelain',
                           '--untracked-files=no'])
         return status != ''

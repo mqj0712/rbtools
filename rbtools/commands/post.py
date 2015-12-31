@@ -635,7 +635,7 @@ class Post(Command):
             client_name=self.options.repository_type)
         server_url = self.get_server_url(repository_info, self.tool)
         api_client, api_root = self.get_api(server_url)
-        self.setup_tool(self.tool, api_root=api_root)
+        self.setup_tool(self.tool, api_root)
 
         if (self.options.exclude_patterns and
             not self.tool.supports_diff_exclude_patterns):

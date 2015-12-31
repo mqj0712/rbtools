@@ -42,6 +42,7 @@ class SyncTransport(Transport):
             verify_ssl=verify_ssl,
             save_cookies=save_cookies,
             ext_auth_cookies=ext_auth_cookies)
+        logging.debug('username %s password %s' %(username, password))
 
     def get_root(self):
         return self._execute_request(HttpRequest(self.server.url))
@@ -83,6 +84,7 @@ class SyncTransport(Transport):
 
         rsp = self.server.make_request(request)
         info = rsp.info()
+        logging.debug('returned info %s' % (info))
         mime_type = info['Content-Type']
         item_content_type = info.get('Item-Content-Type', None)
 
